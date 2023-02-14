@@ -1,0 +1,70 @@
+// Define a duração da respiração
+
+const breathDuration = 5000;  // 5 segundos
+
+// Define o tempo de pausa entre inspiração e expiração
+
+const pauseDuration = 1000;  // 1 segundo
+
+// Função para controlar o tempo da respiração
+
+function breathe(duration) {
+
+  const startTime = Date.now();
+
+  let elapsedTime = 0;
+
+  // Animação da respiração
+
+  const animation = setInterval(() => {
+
+    elapsedTime = Date.now() - startTime;
+
+    // Calcula o progresso da respiração
+
+    const progress = elapsedTime / duration;
+
+    // Controla a opacidade do texto para simular a respiração
+
+    const opacity = Math.sin(progress * Math.PI);
+
+    document.querySelector("#breathe-text").style.opacity = opacity;
+
+    // Para a animação quando a respiração estiver concluída
+
+    if (elapsedTime >= duration) {
+
+      clearInterval(animation);
+
+    }
+
+  }, 50);  // Atualiza a animação a cada 50 milissegundos
+
+}
+
+// Função para iniciar a respiração guiada
+
+function startBreathing() {
+
+  document.querySelector("#breathe-text").innerHTML = "Inale...";
+
+  breathe(breathDuration);
+
+  setTimeout(() => {
+
+    document.querySelector("#breathe-text").innerHTML = "Segure...";
+
+    setTimeout(() => {
+
+      document.querySelector("#breathe-text").innerHTML = "Exale...";
+
+      breathe(breathDuration);
+
+    }, pauseDuration);
+
+  }, breathDuration + );
+
+}
+
+// Adiciona um event listener para iniciar a respiração guiada ao clicar no botão
+
